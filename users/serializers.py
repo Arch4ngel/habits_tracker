@@ -8,7 +8,7 @@ from users.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'email', 'password', 'is_active')
+        fields = ('id', 'first_name', 'last_name', 'email', 'password', 'is_active', 'telegram')
 
     def create(self, validated_data):
         new_code = ''.join([str(random.randint(0, 9)) for _ in range(5)])
