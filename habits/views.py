@@ -6,6 +6,7 @@ from habits.models import Habit
 from habits.paginations import HabitsPagination
 from habits.permissions import IsOwner
 from habits.serializers import HabitSerializer
+from habits.tasks import TelegramBot
 
 
 class HabitViewSet(viewsets.ModelViewSet):
@@ -23,7 +24,8 @@ class HabitViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         new_habit = serializer.save()
         new_habit.user = self.request.user
-        services.create_periodic_send_reminder(new_habit)
+        telegram_bot = TelegramBot
+        services.create_periodic_send_reminder(new_habit, telegram_bot)
         new_habit.save()
 
 

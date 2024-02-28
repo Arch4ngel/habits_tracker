@@ -1,7 +1,7 @@
 from django_celery_beat.models import IntervalSchedule, PeriodicTask
 
 
-def create_periodic_send_reminder(habit):
+def create_periodic_send_reminder(habit, bot):
     text = (f'Привет, {habit.user}! Необходимо выполнять {habit.action} в {habit.timing} '
             f'в {habit.location} в течение {habit.duration}. Награда - {habit.reward}!')
     schedule, created = IntervalSchedule.objects.get_or_create(

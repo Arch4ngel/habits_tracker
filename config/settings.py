@@ -90,10 +90,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'habits_tracker',
+        'NAME': os.environ.get('POSTGRES_DB'),
         'USER': 'postgres',
-        'PASSWORD': os.environ.get('POSTGRES_PASS'),
-        'HOST': '127.0.0.1',
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db',
         'PORT': 5432,
     },
 }
@@ -189,7 +189,9 @@ CSRF_TRUSTED_ORIGINS = [
     # и добавьте адрес бэкенд-сервера
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+ALLOWED_HOSTS = ['0.0.0.0']
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),

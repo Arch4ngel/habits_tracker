@@ -4,6 +4,10 @@ from celery import shared_task
 from django.conf import settings
 
 
+class TelegramBot:
+    pass
+
+
 @shared_task
 def send_reminder(telegram_id, text):
     bot_data = requests.get(f'https://api.telegram.org/bot{settings.TELEGRAM_BOT_API_KEY}/getUpdates').json()
